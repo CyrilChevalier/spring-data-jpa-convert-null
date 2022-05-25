@@ -18,9 +18,10 @@ class AttributeConverterDemoApplicationTests {
 
     @Test
     void contextLoads() {
-        MyEntity result = myRepo.save(MyEntity.builder().name("TEST").date(LocalDate.now()).build());
-        List<MyEntity> dates = myRepo.findByDate(null);
-        dates = myRepo.findByDate(LocalDate.now());
+        myRepo.save(MyEntity.builder().name("TEST").date(LocalDate.now()).build());
+        myRepo.save(MyEntity.builder().name("Null").date(null).build());
+        List<MyEntity> dates = myRepo.findByDate(LocalDate.now());
+        dates = myRepo.findByDate(null);
     }
 
 }

@@ -29,7 +29,7 @@ public class MyConverter implements AttributeConverter<LocalDate, Long> {
      */
     @Override
     public Long convertToDatabaseColumn(LocalDate attribute) {
-        return attribute !=null ? attribute.atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli() : null;
+        return attribute !=null ? attribute.atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli() : 0L;
     }
 
     /**
@@ -47,6 +47,6 @@ public class MyConverter implements AttributeConverter<LocalDate, Long> {
      */
     @Override
     public LocalDate convertToEntityAttribute(Long dbData) {
-        return dbData!=null ? Instant.ofEpochMilli(dbData).atZone(ZoneOffset.UTC).toLocalDate() : null;
+        return dbData!=null && dbData!=0 ? Instant.ofEpochMilli(dbData).atZone(ZoneOffset.UTC).toLocalDate() : null;
     }
 }
