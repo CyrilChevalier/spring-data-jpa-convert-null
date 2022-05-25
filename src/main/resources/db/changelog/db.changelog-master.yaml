@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: create_my_entity
+      author: ccr
+      preConditions:
+        - onFail: MARK_RAN
+        - not:
+            - tableExists:
+                schemaName: public
+                tableName: my_entity
+      changes :
+        - createSequence:
+            schemaName: public
+            sequenceName: my_entity_seq
+            startValue: 1
+            incrementBy: 1
+        - createTable:
+            schemaName: public
+            tableName: my_entity
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_my_entity
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: name
+                  type: VARCHAR(60)
+              - column:
+                  name: date
+                  type: NUMERIC
+                  constraints:
+                    nullable: false
+
